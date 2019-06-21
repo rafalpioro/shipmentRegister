@@ -1,8 +1,10 @@
 package pl.pioro.shipmentregister.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.CarrierType;
+import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.CarrierTypeRepository;
 
 import javax.transaction.Transactional;
@@ -22,23 +24,28 @@ public class CarrierTypeController {
     }
 
     @PostMapping(consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public CarrierType create(@RequestBody CarrierType carrierType){
         return carrierTypeRepository.save(carrierType);
     }
 
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable("id") int id){
+        if(carrierTypeRepository.findById(id) == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         carrierTypeRepository.deleteById(id);
     }
 
     @GetMapping(path = "/{id}")
     public CarrierType findById(@PathVariable("id") int id){
-        return carrierTypeRepository.findById(id);
+        CarrierType carrierType = carrierTypeRepository.findById(id);
+        if(carrierType == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        return carrierType;
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
     public CarrierType updateCarrier(@PathVariable("id") int id, @RequestBody CarrierType carrierType) {
         CarrierType carrierTypeUpdated = carrierTypeRepository.findById(id);
+        if(carrierTypeUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         carrierTypeUpdated.setName(carrierType.getName());
 
         return this.carrierTypeRepository.save(carrierTypeUpdated);

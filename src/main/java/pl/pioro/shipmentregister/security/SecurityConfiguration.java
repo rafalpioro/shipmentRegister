@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.pioro.shipmentregister.repository.RoleRepository;
 import pl.pioro.shipmentregister.repository.UserRepository;
 
 @Configuration
@@ -49,6 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/carriers/**","/clients/**","/projects/**","/recipients/**","/shipments/**")
+                .hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.PATCH,"/carriers/**","/clients/**","/projects/**","/recipients/**","/shipments/**")
                 .hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.PUT,"/carrier/**","/carriers/**","/clients/**","/projects/**","/recipients/**","/shipments/**")
                 .hasAnyRole("ADMIN", "USER")
