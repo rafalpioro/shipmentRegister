@@ -3,6 +3,7 @@ package pl.pioro.shipmentregister.entity;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -15,19 +16,19 @@ public class Recipient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 80)
     @Column(unique = true)
     private String name;
 
-    @NotNull
+    @NotBlank
     private String address;
 
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 60)
     private String city;
 
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 10)
     @Column(name = "zip_code")
     private String zipCode;
@@ -103,11 +104,4 @@ public class Recipient {
         isActive = active;
     }
 
-    public List<Shipment> getShipments() {
-        return shipments;
-    }
-
-    public void setShipments(List<Shipment> shipments) {
-        this.shipments = shipments;
-    }
 }

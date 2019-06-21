@@ -6,4 +6,5 @@ import pl.pioro.shipmentregister.entity.Role;
 
 @RestResource
 public interface RoleRepository extends JpaRepository<Role, Long> {
+    Role findById(long id);
 }

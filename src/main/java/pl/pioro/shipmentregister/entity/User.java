@@ -4,9 +4,12 @@ package pl.pioro.shipmentregister.entity;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -15,19 +18,20 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 60)
     private String name;
 
-    @NotNull
+    @NotBlank
     @Size(min = 6, max = 240)
     private String password;
 
-    @NotNull
+    @NotBlank
     @Email
     @Column(unique = true)
     private String email;
@@ -96,13 +100,6 @@ public class User {
         this.role = role;
     }
 
-    public List<Shipment> getShipments() {
-        return shipments;
-    }
-
-    public void setShipments(List<Shipment> shipments) {
-        this.shipments = shipments;
-    }
 
     @Override
     public String toString() {

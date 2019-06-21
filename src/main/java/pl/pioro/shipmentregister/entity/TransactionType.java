@@ -1,6 +1,7 @@
 package pl.pioro.shipmentregister.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -13,7 +14,7 @@ public class TransactionType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 150)
     @Column(unique = true)
     private String name;
