@@ -1,5 +1,7 @@
 package pl.pioro.shipmentregister.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "clients")
+@ApiModel(description = "Clients of the company")
 public class Client {
 
     @Id
@@ -19,6 +22,7 @@ public class Client {
     @NotBlank
     @Size(min = 2, max = 150)
     @Column(unique = true)
+    @ApiModelProperty(notes = "name must be unique")
     private String name;
 
     @NotBlank
@@ -26,11 +30,13 @@ public class Client {
 
     @NotBlank
     @Size(min = 2, max = 150)
+    @ApiModelProperty(notes = "min 2 characters")
     private String city;
 
     @NotBlank
     @Size(min = 2, max = 10)
     @Column(name = "zip_code")
+    @ApiModelProperty(notes = "min 2, max 10 characters")
     private String zipCode;
 
     @ManyToOne

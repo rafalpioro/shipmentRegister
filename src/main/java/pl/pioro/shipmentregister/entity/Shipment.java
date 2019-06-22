@@ -1,5 +1,6 @@
 package pl.pioro.shipmentregister.entity;
 
+import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "shipments")
+@ApiModel(description = "Shipments in the company")
 public class Shipment {
 
     @Id

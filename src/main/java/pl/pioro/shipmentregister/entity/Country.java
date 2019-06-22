@@ -1,5 +1,8 @@
 package pl.pioro.shipmentregister.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "countries")
+@ApiModel(description = "Countries where goods are delivered")
 public class Country {
 
     @Id
@@ -17,11 +21,13 @@ public class Country {
     @NotBlank
     @Size(min = 2, max = 150)
     @Column(unique = true)
+    @ApiModelProperty(notes = "name must be unique")
     private String name;
 
     @NotBlank
     @Size(min = 2, max = 4)
     @Column(unique = true)
+    @ApiModelProperty(notes = "code must be unique")
     private String code;
 
     @OneToMany(mappedBy = "country", orphanRemoval = true)
@@ -34,6 +40,11 @@ public class Country {
     private List<Recipient> recipients;
 
     public Country() {
+    }
+
+    public Country(@NotBlank @Size(min = 2, max = 150) String name, @NotBlank @Size(min = 2, max = 4) String code) {
+        this.name = name;
+        this.code = code;
     }
 
     public Long getId() {

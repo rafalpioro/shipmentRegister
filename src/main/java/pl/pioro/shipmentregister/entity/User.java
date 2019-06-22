@@ -2,10 +2,10 @@ package pl.pioro.shipmentregister.entity;
 
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,6 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@ApiModel(description = "Users of the application")
 public class User {
 
 
@@ -25,15 +26,17 @@ public class User {
 
     @NotBlank
     @Size(min = 2, max = 60)
+    @ApiModelProperty(notes = "min 2 characters")
     private String name;
 
     @NotBlank
-    @Size(min = 6, max = 240)
+    @Size(min = 4, max = 360)
     private String password;
 
     @NotBlank
     @Email
     @Column(unique = true)
+    @ApiModelProperty(notes = "email must be unique and valid")
     private String email;
 
     @Column(name = "is_active")

@@ -1,5 +1,7 @@
 package pl.pioro.shipmentregister.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "projects")
+@ApiModel(description = "Projects in the company")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +21,12 @@ public class Project {
 
     @NotBlank
     @Size(min = 2, max = 150)
+    @ApiModelProperty(notes = "min 2 characters")
     private String number;
 
     @NotBlank
     @Size(min = 2, max = 150)
+    @ApiModelProperty(notes = "min 2 characters")
     private String name;
 
     @ManyToOne

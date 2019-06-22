@@ -3,8 +3,8 @@ package pl.pioro.shipmentregister.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.pioro.shipmentregister.entity.Project;
 import pl.pioro.shipmentregister.entity.User;
 import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.UserRepository;
@@ -19,6 +19,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public Iterable<User> findAll(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
@@ -35,6 +37,8 @@ public class UserController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
     public User create(@RequestBody User user){
+        String password = user.getPassword();
+        user.setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);
     }
 

@@ -1,5 +1,8 @@
 package pl.pioro.shipmentregister.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "shipment_statuses")
+@ApiModel(description = "Statuses that a shipment can have")
 public class ShipmentStatus {
 
     @Id
@@ -15,8 +19,9 @@ public class ShipmentStatus {
     private Integer id;
 
     @NotBlank
-    @Size(min = 2, max = 150)
+    @Size(min = 2, max = 240)
     @Column(unique = true)
+    @ApiModelProperty(notes = "name must be unique, min 2 characters")
     private String name;
 
     @OneToMany(mappedBy = "shipmentStatus", orphanRemoval = true)
