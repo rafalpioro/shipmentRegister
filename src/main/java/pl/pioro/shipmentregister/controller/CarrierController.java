@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 
 @RestController
 @Transactional
-@CrossOrigin
+@CrossOrigin(maxAge = 3600)
 @RequestMapping(path = "/carriers", produces = "application/json")
 public class CarrierController {
     @Autowired
