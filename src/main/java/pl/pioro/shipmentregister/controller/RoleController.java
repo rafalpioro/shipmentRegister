@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.repository.RoleRepository;
 
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -27,7 +28,7 @@ public class RoleController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Role create(@RequestBody Role role){
+    public Role create(@Valid @RequestBody Role role){
         return roleRepository.save(role);
     }
 
@@ -45,7 +46,7 @@ public class RoleController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Role updateRole(@PathVariable("id") long id, @RequestBody Role role) {
+    public Role updateRole(@PathVariable("id") long id, @Valid @RequestBody Role role) {
         Role roleUpdated = roleRepository.findById(id);
         if(role == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         roleUpdated.setName(role.getName());

@@ -8,6 +8,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.ProjectStatusRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -25,7 +26,7 @@ public class ProjectStatusController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public ProjectStatus create(@RequestBody ProjectStatus projectStatus){
+    public ProjectStatus create(@Valid @RequestBody ProjectStatus projectStatus){
         return projectStatusRepository.save(projectStatus);
     }
 
@@ -43,7 +44,7 @@ public class ProjectStatusController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public ProjectStatus updateProjectStatus(@PathVariable("id") int id, @RequestBody ProjectStatus projectStatus) {
+    public ProjectStatus updateProjectStatus(@PathVariable("id") int id, @Valid @RequestBody ProjectStatus projectStatus) {
         ProjectStatus projectStatusUpdated = projectStatusRepository.findById(id);
         if(projectStatusUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         projectStatusUpdated.setName(projectStatus.getName());

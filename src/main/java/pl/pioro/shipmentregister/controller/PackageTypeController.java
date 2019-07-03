@@ -10,6 +10,7 @@ import pl.pioro.shipmentregister.repository.PackageTypeRepository;
 
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -27,7 +28,7 @@ public class PackageTypeController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public PackageType create(@RequestBody PackageType packageType){
+    public PackageType create(@Valid @RequestBody PackageType packageType){
         return packageTypeRepository.save(packageType);
     }
 
@@ -45,7 +46,7 @@ public class PackageTypeController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public PackageType updatePackageType(@PathVariable("id") int id, @RequestBody PackageType packageType) {
+    public PackageType updatePackageType(@PathVariable("id") int id, @Valid @RequestBody PackageType packageType) {
         PackageType packageTypeUpdated = packageTypeRepository.findById(id);
         if(packageTypeUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         packageTypeUpdated.setName(packageType.getName());

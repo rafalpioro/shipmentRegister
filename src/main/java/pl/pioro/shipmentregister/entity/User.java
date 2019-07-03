@@ -2,6 +2,7 @@ package pl.pioro.shipmentregister.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.ColumnDefault;
@@ -31,6 +32,7 @@ public class User {
 
     @NotBlank
     @Size(min = 4, max = 360)
+    @JsonIgnore
     private String password;
 
     @NotBlank

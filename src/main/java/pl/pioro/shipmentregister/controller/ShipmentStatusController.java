@@ -8,6 +8,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.ShipmentStatusRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -43,7 +44,7 @@ public class ShipmentStatusController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public ShipmentStatus updateShipmentStatus(@PathVariable("id") int id, @RequestBody ShipmentStatus shipmentStatus) {
+    public ShipmentStatus updateShipmentStatus(@PathVariable("id") int id, @Valid @RequestBody ShipmentStatus shipmentStatus) {
         ShipmentStatus shipmentStatusUpdated = shipmentStatusRepository.findById(id);
         if(shipmentStatusUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         shipmentStatusUpdated.setName(shipmentStatus.getName());

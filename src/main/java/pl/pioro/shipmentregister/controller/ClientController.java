@@ -10,6 +10,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.ClientRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 
 @RestController
@@ -35,7 +36,7 @@ public class ClientController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Client create(@RequestBody Client client){
+    public Client create(@Valid @RequestBody Client client){
         return clientRepository.save(client);
     }
 
@@ -62,7 +63,7 @@ public class ClientController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Client updateClient(@PathVariable("id") long id, @RequestBody Client client) {
+    public Client updateClient(@PathVariable("id") long id, @Valid @RequestBody Client client) {
         Client clientUpdated = clientRepository.findById(id);
         if(clientUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         clientUpdated.setName(client.getName());

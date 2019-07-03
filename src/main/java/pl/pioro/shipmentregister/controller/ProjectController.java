@@ -10,6 +10,7 @@ import pl.pioro.shipmentregister.repository.ProjectRepository;
 
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -32,7 +33,7 @@ public class ProjectController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Project create(@RequestBody Project project){
+    public Project create(@Valid @RequestBody Project project){
         return projectRepository.save(project);
     }
 
@@ -59,7 +60,7 @@ public class ProjectController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Project updateProject(@PathVariable("id") long id, @RequestBody Project project) {
+    public Project updateProject(@PathVariable("id") long id, @Valid @RequestBody Project project) {
         Project projectUpdated = projectRepository.findById(id);
         if(projectUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         projectUpdated.setName(project.getName());

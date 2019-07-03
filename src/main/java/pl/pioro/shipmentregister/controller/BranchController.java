@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.repository.BranchRepository;
 
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -26,7 +27,7 @@ public class BranchController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Branch create(@RequestBody Branch branch){
+    public Branch create(@Valid @RequestBody Branch branch){
         return branchRepository.save(branch);
     }
 
@@ -44,7 +45,7 @@ public class BranchController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Branch updateBranch(@PathVariable("id") long id, @RequestBody Branch branch) {
+    public Branch updateBranch(@PathVariable("id") long id, @Valid @RequestBody Branch branch) {
         Branch branchUpdated = branchRepository.findById(id);
         if(branchUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         branchUpdated.setName(branch.getName());

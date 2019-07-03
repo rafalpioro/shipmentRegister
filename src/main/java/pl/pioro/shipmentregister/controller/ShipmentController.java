@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.ShipmentRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -32,7 +33,7 @@ public class ShipmentController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Shipment create(@RequestBody Shipment shipment){
+    public Shipment create(@Valid @RequestBody Shipment shipment){
         return shipmentRepository.save(shipment);
     }
 
@@ -59,7 +60,7 @@ public class ShipmentController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Shipment updateShipment(@PathVariable("id") long id, @RequestBody Shipment shipment) {
+    public Shipment updateShipment(@PathVariable("id") long id, @Valid @RequestBody Shipment shipment) {
         Shipment shipmentUpdated = shipmentRepository.findById(id);
         if(shipmentUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         shipmentUpdated.setBranch(shipment.getBranch());

@@ -10,6 +10,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.*;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -92,7 +93,7 @@ public class AdminController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User create(@RequestBody User user){
+    public User create(@Valid @RequestBody User user){
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);

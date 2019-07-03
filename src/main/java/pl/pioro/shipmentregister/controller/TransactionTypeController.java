@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.TransactionTypeRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -26,7 +27,7 @@ public class TransactionTypeController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public TransactionType create(@RequestBody TransactionType transactionType){
+    public TransactionType create(@Valid @RequestBody TransactionType transactionType){
         return transactionTypeRepository.save(transactionType);
     }
 
@@ -44,7 +45,7 @@ public class TransactionTypeController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public TransactionType updateTransactionType(@PathVariable("id") int id, @RequestBody TransactionType transactionType) {
+    public TransactionType updateTransactionType(@PathVariable("id") int id, @Valid @RequestBody TransactionType transactionType) {
         TransactionType transactionTypeUpdated = transactionTypeRepository.findById(id);
         if(transactionTypeUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         transactionTypeUpdated.setName(transactionType.getName());

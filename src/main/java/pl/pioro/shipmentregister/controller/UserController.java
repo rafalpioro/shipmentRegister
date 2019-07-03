@@ -17,8 +17,6 @@ public class UserController {
 
 
 
-
-
     @GetMapping
     public User findCurrentUser(@RequestParam(value = "email") String email) {
 

@@ -10,6 +10,7 @@ import pl.pioro.shipmentregister.repository.RecipientRepository;
 
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -33,7 +34,7 @@ public class RecipientController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Recipient create(@RequestBody Recipient recipient){
+    public Recipient create(@Valid @RequestBody Recipient recipient){
         return recipientRepository.save(recipient);
     }
 
@@ -60,7 +61,7 @@ public class RecipientController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Recipient updateRecipient(@PathVariable("id") long id, @RequestBody Recipient recipient) {
+    public Recipient updateRecipient(@PathVariable("id") long id, @Valid @RequestBody Recipient recipient) {
         Recipient recipientUpdated = recipientRepository.findById(id);
         if(recipientUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         recipientUpdated.setName(recipient.getName());

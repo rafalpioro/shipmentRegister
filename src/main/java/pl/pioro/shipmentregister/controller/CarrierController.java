@@ -10,6 +10,7 @@ import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.CarrierRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -26,7 +27,7 @@ public class CarrierController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Carrier create(@RequestBody Carrier carrier){
+    public Carrier create(@Valid @RequestBody Carrier carrier){
         return carrierRepository.save(carrier);
     }
 
@@ -44,7 +45,7 @@ public class CarrierController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Carrier updateCarrier(@PathVariable("id") long id, @RequestBody Carrier carrier) {
+    public Carrier updateCarrier(@PathVariable("id") long id, @Valid @RequestBody Carrier carrier) {
         Carrier carrierUpdated = carrierRepository.findById(id);
         if(carrierUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         carrierUpdated.setName(carrier.getName());

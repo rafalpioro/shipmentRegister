@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.repository.CountryRepository;
 
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 @Transactional
@@ -26,7 +27,7 @@ public class CountryController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Country create(@RequestBody Country country){
+    public Country create(@Valid @RequestBody Country country){
         return countryRepository.save(country);
     }
 
@@ -44,7 +45,7 @@ public class CountryController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Country updateCountry(@PathVariable("id") long id, @RequestBody Country country) {
+    public Country updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
         Country countryUpdated = countryRepository.findById(id);
         if(countryUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         countryUpdated.setName(country.getName());
