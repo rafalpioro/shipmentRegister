@@ -1,7 +1,9 @@
 package pl.pioro.shipmentregister.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.Recipient;
@@ -24,8 +26,8 @@ public class RecipientController {
     @GetMapping
     public Iterable<Recipient> findAllActive(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
         if(page != null && size != null) {
-            PageRequest pageRequest = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
-            return recipientRepository.findAllByIsActiveTrue(pageRequest);
+            Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
+            return recipientRepository.findAllByIsActiveTrue(pageable);
         } else {
             return recipientRepository.findAllByIsActiveTrue();
         }
@@ -57,6 +59,13 @@ public class RecipientController {
     public Recipient findById(@PathVariable("id") long id){
         Recipient recipient = recipientRepository.findById(id);
         if(recipient == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        return recipient;
+    }
+
+    @GetMapping(path = "/")
+    public Recipient findByName(@RequestParam(value = "name") String name){
+        Recipient recipient = recipientRepository.findByName(name);
+        if(recipient == null) throw new SourceNotFoundException("Source do not found: name= "+ name);
         return recipient;
     }
 

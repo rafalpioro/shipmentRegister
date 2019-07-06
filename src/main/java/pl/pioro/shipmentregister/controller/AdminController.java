@@ -34,7 +34,13 @@ public class AdminController {
     private UserRepository userRepository;
 
     @Autowired
+    private CountryRepository countryRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
+
+
 
     @GetMapping("/clients")
     public Iterable<Client> findAllClients(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
@@ -91,9 +97,9 @@ public class AdminController {
         }
     }
 
-    @PostMapping(consumes = "application/json")
+    @PostMapping(path = "/users",consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User create(@Valid @RequestBody User user){
+    public User createUser(@Valid @RequestBody User user){
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);
@@ -109,13 +115,13 @@ public class AdminController {
     }
 
     @DeleteMapping(path = "/users/{id}")
-    public void delete(@PathVariable("id") long id){
+    public void deleteUser(@PathVariable("id") long id){
         if(userRepository.findById(id) == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         userRepository.deleteById(id);
     }
 
     @GetMapping(path = "/users/{id}")
-    public User findById(@PathVariable("id") long id){
+    public User findUserById(@PathVariable("id") long id){
         User user = userRepository.findById(id);
         if(user == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         return user;
@@ -132,6 +138,35 @@ public class AdminController {
         userUpdated.setActive(user.getActive());
 
         return this.userRepository.save(userUpdated);
+    }
+
+    @PostMapping(path = "/countries", consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Country createCountry(@Valid @RequestBody Country country){
+        return countryRepository.save(country);
+    }
+
+    @DeleteMapping(path = "/countries/{id}")
+    public void deleteCountry(@PathVariable("id") long id){
+        if(countryRepository.findById(id) == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        countryRepository.deleteById(id);
+    }
+
+    @GetMapping(path = "/countries/{id}")
+    public Country findCountryById(@PathVariable("id") long id){
+        Country country = countryRepository.findById(id);
+        if(country == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        return country;
+    }
+
+    @PutMapping(path = "/countries/{id}", consumes = "application/json")
+    public Country updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
+        Country countryUpdated = countryRepository.findById(id);
+        if(countryUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        countryUpdated.setName(country.getName());
+        countryUpdated.setCode(country.getCode());
+
+        return this.countryRepository.save(countryUpdated);
     }
 
 

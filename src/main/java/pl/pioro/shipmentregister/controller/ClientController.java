@@ -2,6 +2,7 @@ package pl.pioro.shipmentregister.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.Client;
@@ -27,8 +28,8 @@ public class ClientController {
         if(page != null && size != null){
             int pageInt = Integer.parseInt(page);
             int sizeInt = Integer.parseInt(size);
-            PageRequest findWithPage = PageRequest.of(pageInt, sizeInt);
-            return clientRepository.findAllByIsActiveTrue(findWithPage);
+            Pageable pageable = PageRequest.of(pageInt, sizeInt);
+            return clientRepository.findAllByIsActiveTrue(pageable);
         } else {
             return clientRepository.findAllByIsActiveTrue();
         }

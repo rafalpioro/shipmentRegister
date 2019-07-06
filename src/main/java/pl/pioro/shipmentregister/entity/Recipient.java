@@ -46,7 +46,7 @@ public class Recipient {
 
     @Column(name = "is_active")
     @ColumnDefault("1")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     @OneToMany(mappedBy = "recipient", orphanRemoval = true)
     private List<Shipment> shipments;
