@@ -1,7 +1,7 @@
 package pl.pioro.shipmentregister.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -62,10 +62,10 @@ public class RecipientController {
         return recipient;
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/name")
     public Recipient findByName(@RequestParam(value = "name") String name){
         Recipient recipient = recipientRepository.findByName(name);
-        if(recipient == null) throw new SourceNotFoundException("Source do not found: name= "+ name);
+        if(recipient == null) return null;
         return recipient;
     }
 

@@ -2,6 +2,7 @@ package pl.pioro.shipmentregister.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,6 +24,10 @@ public class Carrier {
     @Column(unique = true)
     @ApiModelProperty(notes = "name must be unique, min 2 characters")
     private String name;
+
+    @Column(name = "is_active")
+    @ColumnDefault("1")
+    private Boolean isActive = true;
 
     @ManyToOne
     @JoinColumn(name = "carrier_type_id")
@@ -53,6 +58,14 @@ public class Carrier {
 
     public CarrierType getCarrierType() {
         return carrierType;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public void setCarrierType(CarrierType carrierType) {

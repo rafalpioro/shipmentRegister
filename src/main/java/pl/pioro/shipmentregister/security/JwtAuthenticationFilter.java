@@ -79,6 +79,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
         response.addHeader("Access-Control-Expose-Headers", "Authorization");
+
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX +  token);
     }
 }
