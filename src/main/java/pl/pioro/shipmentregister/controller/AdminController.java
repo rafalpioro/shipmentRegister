@@ -2,15 +2,11 @@ package pl.pioro.shipmentregister.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.*;
-import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.*;
-
 import javax.transaction.Transactional;
-import javax.validation.Valid;
+
 
 @RestController
 @Transactional

@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.pioro.shipmentregister.entity.Country;
-import pl.pioro.shipmentregister.entity.Role;
-import pl.pioro.shipmentregister.entity.User;
+import pl.pioro.shipmentregister.entity.*;
 
 @Service
 public class DbInit implements CommandLineRunner {
@@ -19,7 +17,16 @@ public class DbInit implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private ProjectStatusRepository projectStatusRepository;
+
+    @Autowired
     private CountryRepository countryRepository;
+
+    @Autowired
+    private TransactionTypeRepository transactionTypeRepository;
+
+    @Autowired
+    private BranchRepository branchRepository;
 
     @Override
     public void run(String... args) {
@@ -33,6 +40,17 @@ public class DbInit implements CommandLineRunner {
         roleRepository.save(admin);
         roleRepository.save(user);
         roleRepository.save(viewer);
+
+        //create project Status
+        ProjectStatus delivered = new ProjectStatus();
+        delivered.setName("delivered");
+        projectStatusRepository.save(delivered);
+
+        //create transaction type
+        TransactionType export = new TransactionType();
+        export.setName("export");
+        transactionTypeRepository.save(export);
+
 
         //create users
         User rafal = new User();
@@ -273,5 +291,14 @@ public class DbInit implements CommandLineRunner {
 
         Country unitedArabEmirates = new Country("United Arab Emirates","AE" );
         this.countryRepository.save(unitedArabEmirates);
+
+        //create branch
+        Branch headquarter = new Branch();
+        headquarter.setName("Headquarter");
+        headquarter.setAddress("Main Street");
+        headquarter.setZipCode("80-337");
+        headquarter.setCity("Gdańsk");
+        headquarter.setCountry(countryRepository.findById(12L));
+        branchRepository.save(headquarter);
     }
 }

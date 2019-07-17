@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.Client;
 
+import pl.pioro.shipmentregister.entity.Recipient;
 import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.ClientRepository;
 
@@ -26,9 +27,7 @@ public class ClientController {
     @GetMapping
     public Iterable<Client> findAllActive(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
         if(page != null && size != null){
-            int pageInt = Integer.parseInt(page);
-            int sizeInt = Integer.parseInt(size);
-            Pageable pageable = PageRequest.of(pageInt, sizeInt);
+            Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
             return clientRepository.findAllByIsActiveTrue(pageable);
         } else {
             return clientRepository.findAllByIsActiveTrue();
@@ -51,6 +50,13 @@ public class ClientController {
     public Client findById(@PathVariable("id") long id){
         Client client = clientRepository.findById(id);
         if(client == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        return client;
+    }
+
+    @GetMapping(path = "/name")
+    public Client findByName(@RequestParam(value = "name") String name){
+        Client client = clientRepository.findByName(name);
+        if(client == null) return null;
         return client;
     }
 

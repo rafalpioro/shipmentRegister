@@ -2,16 +2,13 @@ package pl.pioro.shipmentregister.security;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.ApiModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.pioro.shipmentregister.entity.User;
 import pl.pioro.shipmentregister.model.LoginViewModel;
-import pl.pioro.shipmentregister.repository.UserRepository;
+
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;

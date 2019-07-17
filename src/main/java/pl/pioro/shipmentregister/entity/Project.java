@@ -20,8 +20,9 @@ public class Project {
     private Long id;
 
     @NotBlank
-    @Size(min = 2, max = 150)
+    @Size(min = 2, max = 20)
     @ApiModelProperty(notes = "min 2 characters")
+    @Column(unique = true)
     private String number;
 
     @NotBlank
@@ -42,12 +43,11 @@ public class Project {
     @NotNull
     private LocalDate startDate;
 
-    @NotNull
     private LocalDate endDate;
 
     @Column(name = "is_active")
     @ColumnDefault("1")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     @OneToMany(mappedBy = "project", orphanRemoval = true)
     private List<Shipment> shipments;

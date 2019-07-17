@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RestController
 @Transactional
 @CrossOrigin
-@RequestMapping(path = "/admin-all/users", produces = "application/json")
+@RequestMapping(path = "/admin/users", produces = "application/json")
 public class UserController {
 
     @Autowired

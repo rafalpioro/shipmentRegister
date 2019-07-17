@@ -53,6 +53,13 @@ public class ProjectController {
         projectRepository.deleteById(id);
     }
 
+    @GetMapping(path = "/number")
+    public Project findByNumber(@RequestParam(value = "number") String number){
+        Project project = projectRepository.findByNumber(number);
+        if(project == null) return null;
+        return project;
+    }
+
     @GetMapping(path = "/{id}")
     public Project findById(@PathVariable("id") long id){
         Project project = projectRepository.findById(id);

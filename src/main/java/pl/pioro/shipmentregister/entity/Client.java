@@ -46,7 +46,7 @@ public class Client {
 
     @Column(name = "is_active")
     @ColumnDefault("1")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     @OneToMany(mappedBy = "client", orphanRemoval = true)
     private List<Project> projects;

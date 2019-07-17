@@ -45,13 +45,11 @@ public class Shipment {
 
     @ManyToOne
     @JoinColumn(name = "carrier_id")
-    @NotNull
     private Carrier carrier;
 
     @Column(name = "is_active")
     @ColumnDefault("1")
-    private Boolean isActive;
-
+    private Boolean isActive= true;
 
     @ColumnDefault("0")
     private Boolean pod;

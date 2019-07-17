@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.entity.Client;
 @RestResource
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findById(long id);
+    Client findByName(String name);
     Iterable<Client> findAllByIsActiveTrue();
     Page<Client> findAllByIsActiveTrue(Pageable pageable);
 

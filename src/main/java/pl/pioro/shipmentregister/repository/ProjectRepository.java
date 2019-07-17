@@ -9,6 +9,7 @@ import pl.pioro.shipmentregister.entity.Project;
 @RestResource
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     Project findById(long id);
+    Project findByNumber(String name);
     Iterable<Project> findAllByIsActiveTrue();
     Page<Project> findAllByIsActiveTrue(Pageable pageable);
 }
