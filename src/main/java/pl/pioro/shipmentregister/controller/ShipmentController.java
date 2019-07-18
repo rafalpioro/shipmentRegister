@@ -29,7 +29,16 @@ public class ShipmentController {
         } else {
             return shipmentRepository.findAllByIsActiveTrue();
         }
+    }
 
+    @GetMapping(path = "/user/{id}")
+    public Iterable<Shipment> findAll(@PathVariable long id, @RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
+        if(page != null && size != null) {
+            Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
+            return shipmentRepository.findAllByUserIdAndIsActiveTrue(id,pageable);
+        } else {
+            return shipmentRepository.findAllByIsActiveTrue();
+        }
     }
 
     @PostMapping(consumes = "application/json")
