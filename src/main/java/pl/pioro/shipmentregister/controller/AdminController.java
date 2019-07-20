@@ -79,13 +79,13 @@ public class AdminController {
     }
 
 
-    @GetMapping("/shipments")
-    public Iterable<Shipment> findAllShipments(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
+    @GetMapping("/shipments-deactivated")
+    public Iterable<Shipment> findAllDeactivatedShipments(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
         if(page != null && size != null) {
             PageRequest pageRequest = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
-            return shipmentRepository.findAll(pageRequest);
+            return shipmentRepository.findAllByIsActiveFalse(pageRequest);
         } else {
-            return shipmentRepository.findAll();
+            return shipmentRepository.findAllByIsActiveFalse();
         }
     }
 
