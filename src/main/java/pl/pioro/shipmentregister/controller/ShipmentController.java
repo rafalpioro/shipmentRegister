@@ -49,10 +49,11 @@ public class ShipmentController {
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void shipmentDeactivated(@PathVariable long id){
+    public void toggleShipmentDeactivated(@PathVariable long id){
         Shipment shipment = shipmentRepository.findById(id);
+        boolean isActive = !shipment.getActive();
         if(shipment == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
-        shipment.setActive(false);
+        shipment.setActive(isActive);
         shipmentRepository.save(shipment);
     }
 
