@@ -20,7 +20,6 @@ public class Branch {
 
     @NotBlank
     @Size(min = 2, max = 150)
-
     @Column(unique = true)
     @ApiModelProperty(notes = "min 2 characters")
     private String name;

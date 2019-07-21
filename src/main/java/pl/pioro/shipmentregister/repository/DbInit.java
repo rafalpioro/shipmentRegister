@@ -28,6 +28,9 @@ public class DbInit implements CommandLineRunner {
     @Autowired
     private BranchRepository branchRepository;
 
+    @Autowired
+    private IncotermsRepository incotermsRepository;
+
     @Override
     public void run(String... args) {
         //create roles
@@ -51,6 +54,14 @@ public class DbInit implements CommandLineRunner {
         export.setName("export");
         transactionTypeRepository.save(export);
 
+        //create incoterms
+        Incoterms fca = new Incoterms();
+        fca.setName("FCA");
+        incotermsRepository.save(fca);
+
+        Incoterms fob = new Incoterms();
+        fob.setName("FOB");
+        incotermsRepository.save(fob);
 
         //create users
         User rafal = new User();

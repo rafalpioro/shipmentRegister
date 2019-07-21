@@ -21,7 +21,7 @@ public class Incoterms {
     @ApiModelProperty(notes = "name must be unique and have 3 characters")
     private String name;
 
-    @OneToMany(mappedBy = "incoterm", orphanRemoval = true)
+    @OneToMany(mappedBy = "incoterms", orphanRemoval = true)
     private List<Shipment> shipments;
 
     public Incoterms() {
