@@ -7,4 +7,5 @@ import pl.pioro.shipmentregister.entity.Branch;
 @RestResource
 public interface BranchRepository extends JpaRepository<Branch, Long> {
     Branch findById(long id);
+    Branch findByName(String name);
 }

@@ -44,6 +44,13 @@ public class BranchController {
         return branch;
     }
 
+    @GetMapping(path = "/name")
+    public Branch findByName(@RequestParam(value = "name") String name){
+        Branch branch = branchRepository.findByName(name);
+        if(branch == null) return null;
+        return branch;
+    }
+
     @PutMapping(path = "/{id}", consumes = "application/json")
     public Branch updateBranch(@PathVariable("id") long id, @Valid @RequestBody Branch branch) {
         Branch branchUpdated = branchRepository.findById(id);
