@@ -67,6 +67,12 @@ public class Shipment {
     @NotNull
     private TransactionType transactionType;
 
+    @ManyToOne
+    @JoinColumn(name = "incoterm_id")
+    @NotNull
+    private Incoterms incoterms;
+
+
     public Shipment() {
     }
 
@@ -172,5 +178,13 @@ public class Shipment {
 
     public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public Incoterms getIncoterms() {
+        return incoterms;
+    }
+
+    public void setIncoterms(Incoterms incoterms) {
+        this.incoterms = incoterms;
     }
 }
