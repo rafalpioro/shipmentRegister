@@ -8,4 +8,5 @@ import pl.pioro.shipmentregister.entity.CarrierType;
 @RestResource
 public interface CarrierTypeRepository extends JpaRepository<CarrierType, Integer> {
     CarrierType findById(int id);
+    CarrierType findByName(String name);
 }

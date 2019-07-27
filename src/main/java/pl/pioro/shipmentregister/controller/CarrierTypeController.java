@@ -3,6 +3,7 @@ package pl.pioro.shipmentregister.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.pioro.shipmentregister.entity.Branch;
 import pl.pioro.shipmentregister.entity.CarrierType;
 import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.CarrierTypeRepository;
@@ -40,6 +41,13 @@ public class CarrierTypeController {
     public CarrierType findById(@PathVariable("id") int id){
         CarrierType carrierType = carrierTypeRepository.findById(id);
         if(carrierType == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
+        return carrierType;
+    }
+
+    @GetMapping(path = "/name")
+    public CarrierType findByName(@RequestParam(value = "name") String name){
+        CarrierType carrierType = carrierTypeRepository.findByName(name);
+        if(carrierType == null) return null;
         return carrierType;
     }
 
