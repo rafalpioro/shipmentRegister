@@ -3,6 +3,7 @@ package pl.pioro.shipmentregister.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.Client;
@@ -25,10 +26,14 @@ public class ClientController {
     private ClientRepository clientRepository;
 
     @GetMapping
-    public Iterable<Client> findAllActive(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
-        if(page != null && size != null){
-            Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
+    public Iterable<Client> findAllActive(@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "page", required = false) String page, @RequestParam(value = "size", required = false) String size) {
+        if(sort !=null && page != null && size != null){
+            Sort.Direction direction = sort.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+            Sort sorted = Sort.by(direction, "name");
+            Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size), sorted);
+
             return clientRepository.findAllByIsActiveTrue(pageable);
+
         } else {
             return clientRepository.findAllByIsActiveTrue();
         }
