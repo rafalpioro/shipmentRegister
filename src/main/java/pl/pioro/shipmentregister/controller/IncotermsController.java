@@ -41,6 +41,13 @@ public class IncotermsController {
         return incoterms;
     }
 
+    @GetMapping(path = "/name")
+    public Incoterms findByName(@RequestParam(value = "name") String name){
+        Incoterms incoterms = incotermsRepository.findByName(name);
+        if(incoterms == null) return null;
+        return incoterms;
+    }
+
     @PutMapping(path = "/{id}", consumes = "application/json")
     public Incoterms updateCarrier(@PathVariable("id") int id, @Valid @RequestBody Incoterms incoterms) {
         Incoterms incotermsUpdated = incotermsRepository.findById(id);

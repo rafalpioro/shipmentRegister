@@ -5,4 +5,5 @@ import pl.pioro.shipmentregister.entity.Incoterms;
 
 public interface IncotermsRepository extends JpaRepository<Incoterms, Integer> {
    Incoterms findById(int id);
+   Incoterms findByName(String name);
 }
