@@ -43,7 +43,7 @@ public class User {
 
     @Column(name = "is_active")
     @ColumnDefault("1")
-    private Boolean isActive;
+    private Boolean isActive= true;
 
     @ManyToOne
     @JoinColumn(name = "role_id")

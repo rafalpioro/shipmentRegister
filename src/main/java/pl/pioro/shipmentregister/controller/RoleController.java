@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RestController
 @Transactional
 @CrossOrigin
-@RequestMapping(path = "/roles", produces = "application/json")
+@RequestMapping(path = "/admin/roles", produces = "application/json")
 public class RoleController {
 
 
