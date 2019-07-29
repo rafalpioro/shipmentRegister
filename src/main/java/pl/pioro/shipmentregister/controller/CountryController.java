@@ -48,6 +48,13 @@ public class CountryController {
         return country;
     }
 
+    @GetMapping(path = "/name")
+    public Country findByName(@RequestParam(value = "name") String name){
+        Country country = countryRepository.findByName(name);
+        if(country == null) return null;
+        return country;
+    }
+
     @PutMapping(path = "/{id}", consumes = "application/json")
     public Country updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
         Country countryUpdated = countryRepository.findById(id);

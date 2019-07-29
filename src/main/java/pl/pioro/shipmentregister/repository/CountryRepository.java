@@ -7,4 +7,5 @@ import pl.pioro.shipmentregister.entity.Country;
 @RestResource
 public interface CountryRepository extends JpaRepository<Country, Long> {
     Country findById(long id);
+    Country findByName(String name);
 }
