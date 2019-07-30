@@ -30,7 +30,7 @@ public class User {
     @ApiModelProperty(notes = "min 2 characters")
     private String name;
 
-    @NotBlank
+
     @Size(min = 4, max = 360)
     @JsonIgnore
     private String password;
