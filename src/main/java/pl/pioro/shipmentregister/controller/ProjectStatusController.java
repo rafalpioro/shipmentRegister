@@ -43,6 +43,13 @@ public class ProjectStatusController {
         return projectStatus;
     }
 
+    @GetMapping(path = "/name")
+    public ProjectStatus findByName(@RequestParam(value = "name") String name){
+        ProjectStatus projectStatus = projectStatusRepository.findByName(name);
+        if(projectStatus == null) return null;
+        return projectStatus;
+    }
+
     @PutMapping(path = "/{id}", consumes = "application/json")
     public ProjectStatus updateProjectStatus(@PathVariable("id") int id, @Valid @RequestBody ProjectStatus projectStatus) {
         ProjectStatus projectStatusUpdated = projectStatusRepository.findById(id);

@@ -7,4 +7,5 @@ import pl.pioro.shipmentregister.entity.ProjectStatus;
 @RestResource
 public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, Integer> {
     ProjectStatus findById(int id);
+    ProjectStatus findByName(String name);
 }
