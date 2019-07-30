@@ -91,7 +91,6 @@ public class AdminUserController {
         if(userUpdated == null) throw new SourceNotFoundException("Source do not found: id= "+ id);
         userUpdated.setName(user.getName());
         userUpdated.setRole(user.getRole());
-        userUpdated.setPassword(user.getPassword());
         userUpdated.setEmail(user.getEmail());
         userUpdated.setActive(user.getActive());
 
