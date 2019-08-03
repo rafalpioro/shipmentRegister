@@ -62,8 +62,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         UserPrincipal principal = (UserPrincipal) authResult.getPrincipal();
 
 
-
-
         // Create JWT Token
         String token = JWT.create()
                 .withClaim("role", role)
