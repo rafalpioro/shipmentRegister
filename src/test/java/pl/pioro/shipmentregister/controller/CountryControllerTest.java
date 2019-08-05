@@ -19,10 +19,6 @@ import pl.pioro.shipmentregister.repository.CountryRepository;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.Mockito.doNothing;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static sun.plugin2.util.PojoUtil.toJson;
 
