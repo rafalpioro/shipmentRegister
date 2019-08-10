@@ -68,11 +68,9 @@ public class CarrierTypeControllerTest {
         carrierType.setName("Name");
         Mockito.when(carrierTypeRepository.findById(carrierType.getId())).thenReturn(Optional.of(carrierType));
 
-//        mvc.perform(
-//                delete("/admin/carriertypes/{id}", carrierType.getId()))
-//                .andExpect(status().isOk());
-//        verify(carrierTypeRepository).findById(carrierType.getId());
-//        verify(carrierTypeRepository).delete(carrierType);
-//        verifyNoMoreInteractions(carrierType);
+        mvc.perform(
+                delete("/admin/carriertypes/{id}", carrierType.getId()))
+                .andExpect(status().isOk());
+
     }
 }
