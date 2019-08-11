@@ -16,6 +16,7 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
 
     Shipment findById(long id);
     Iterable<Shipment> findAllByIsActiveTrue();
+    Iterable<Shipment> findAllByUserIdAndIsActiveTrue(Long id);
     Page<Shipment> findAllByIsActiveTrue(Pageable pageable);
     Page<Shipment> findAllByIsActiveFalse(Pageable pageable);
     Iterable<Shipment> findAllByIsActiveFalse();

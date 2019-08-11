@@ -36,7 +36,7 @@ public class ShipmentController {
             Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
             return shipmentRepository.findAllByUserIdAndIsActiveTrue(id,pageable);
         } else {
-            return shipmentRepository.findAllByIsActiveTrue();
+            return shipmentRepository.findAllByUserIdAndIsActiveTrue(id);
         }
     }
 
