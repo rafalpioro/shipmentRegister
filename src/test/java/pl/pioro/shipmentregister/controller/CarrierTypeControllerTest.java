@@ -40,7 +40,7 @@ public class CarrierTypeControllerTest {
         carrierType.setId(1);
         carrierType.setName("Name");
 
-        Mockito.when(carrierTypeRepository.findById(Mockito.anyInt())).thenReturn(carrierType);
+        Mockito.when(carrierTypeRepository.findById(1)).thenReturn(carrierType);
 
         mvc.perform(get("/admin/carriertypes/1")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().json("{id:1, name:Name}",false));
@@ -66,11 +66,12 @@ public class CarrierTypeControllerTest {
         CarrierType carrierType = new CarrierType();
         carrierType.setId(1);
         carrierType.setName("Name");
-        Mockito.when(carrierTypeRepository.findById(carrierType.getId())).thenReturn(Optional.of(carrierType));
+        Mockito.when(carrierTypeRepository.findById(1)).thenReturn(carrierType);
 
         mvc.perform(
                 delete("/admin/carriertypes/{id}", carrierType.getId()))
                 .andExpect(status().isOk());
 
+        Mockito.verify(carrierTypeRepository).deleteById(1);
     }
 }
