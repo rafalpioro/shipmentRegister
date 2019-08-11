@@ -74,4 +74,20 @@ public class CarrierTypeControllerTest {
 
         Mockito.verify(carrierTypeRepository).deleteById(1);
     }
+
+    @Test
+    public void testPutCarrierType() throws Exception {
+        CarrierType carrierType = new CarrierType();
+        carrierType.setId(1);
+        carrierType.setName("Name");
+        Mockito.when(carrierTypeRepository.findById(1)).thenReturn(carrierType);
+
+        mvc.perform(
+                put("/admin/carriertypes/{id}", carrierType.getId())
+                        .contentType(MediaType.APPLICATION_JSON).content(toJson(carrierType)))
+                .andExpect(status().isOk());
+
+        Mockito.verify(carrierTypeRepository).save(carrierType);
+        Mockito.verify(carrierTypeRepository).findById(1);
+    }
 }

@@ -85,11 +85,15 @@ public class SecurityTest {
 
     private void createActiveUser() {
         User user = new User();
+        Role role =  new Role();
+        role.setName("ROLE_ADMIN");
+        role.setId(1L);
+        roleRepository.save(role);
         user.setActive(true);
         user.setName(USER_NAME);
         user.setEmail(USER_EMAIL);
         user.setPassword(passwordEncoder.encode(USER_PASSWORD));
-        user.setRole(roleRepository.findById(1));
+        user.setRole(role);
         userRepository.save(user);
     }
 }
