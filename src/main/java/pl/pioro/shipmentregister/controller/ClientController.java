@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.pioro.shipmentregister.entity.Client;
 
-import pl.pioro.shipmentregister.entity.Recipient;
 import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.ClientRepository;
 

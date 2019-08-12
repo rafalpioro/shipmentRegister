@@ -1,6 +1,5 @@
 package pl.pioro.shipmentregister.integration;
 
-import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

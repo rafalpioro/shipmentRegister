@@ -3,7 +3,6 @@ package pl.pioro.shipmentregister.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.pioro.shipmentregister.entity.Branch;
 import pl.pioro.shipmentregister.entity.CarrierType;
 import pl.pioro.shipmentregister.exception.SourceNotFoundException;
 import pl.pioro.shipmentregister.repository.CarrierTypeRepository;
