@@ -4,4 +4,8 @@ import static org.junit.Assert.*;
 
 public class RoleControllerTest {
 
+    public void shouldReturnCarrierTypesById() {
+
+    }
+
 }
